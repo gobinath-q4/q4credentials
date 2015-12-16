@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Widget</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<style>
+	*{margin:0;}
+	.widgetWrapper{
+		width:500px;
+		margin:5% auto 0;
+		position:relative;
+	}
+	.widgetCnt{
+		width:96%;
+		overflow:hidden;
+		padding:10px 10px 0 10px;
+		border-radius:5px;
+		border:1px solid #999999;
+		margin-bottom:15px;
+		text-align:left;
+		position:relative;
+		height:212px;
+	}
+	.widgetleft{
+		position: absolute;
+		left: -22px;
+		top: 50%;
+		font-size: 28px;
+		cursor: pointer;
+		text-decoration:inherit;
+		color:#000;
+	}
+	.widgetright{
+		position: absolute;
+		right: -22px;
+		top: 50%;
+		font-size: 28px;
+		cursor: pointer;
+		text-decoration:inherit;
+		color:#000;
+	}
+	.repeatwidget{
+		width:45%;
+		padding:30px 5px;
+		margin-bottom:10px;
+		border:1px solid #333;
+		display:inline-block;
+		border-radius:5px;
+		text-align:center;		
+	}
+	.repeatwidget:nth-of-type(even){
+		margin-left:10px;
+	}
+	.topText{
+		display:inline-block;
+		margin-bottom:5px;
+		width:97%;
+		padding:0 10px;
+	}
+	.topText span:nth-of-type(1){
+		text-align:left;
+		float:left;
+		font-weight:bold;
+	}
+	.topText span:nth-of-type(2){
+		text-align:right;
+		float:right;
+		font-weight:bold;
+	}
+	.set{position:relative;}
+	.settwo{display:none;}
+</style>
+<section class="widgetWrapper">
+	<a href="javascript:void(0)" class="widgetleft leftright"><</a>
+	<div class="widgetCnt">
+		<div class="topText">
+			<span>My Marquee</span>
+			<span>Add</span>
+		</div>
+		<div class="setone set">
+			<div class="repeatwidget">widget 1</div>
+			<div class="repeatwidget">widget 2</div>
+			<div class="repeatwidget">widget 3</div>
+			<div class="repeatwidget">widget 4</div>
+		</div>
+		<div class="settwo set">
+			<div class="repeatwidget">widget 5</div>
+			<div class="repeatwidget">widget 6</div>
+			<div class="repeatwidget">widget 7</div>
+		</div>
+	</div>
+	<a href="javascript:void(0)" class="widgetright leftright">></a>
+</section>
+<script>
+	$(function(){			
+		$('.settwo').animate({
+				left:'495px',
+				top:'-180px',
+		});
+		$('.settwo').show(1000);
+		var sp=1000;
+		$('.leftright').click(function(){
+			var ar=$('.leftright').index(this);	
+			if(ar==0){//left
+				$('.settwo').animate({
+					left:'495px',
+				},sp);
+				$('.setone').animate({
+					left:'0px',
+				},sp);
+			}else if(ar==1){//right				
+				$('.settwo').animate({
+					left:'0px',
+				},sp);
+				$('.setone').animate({
+					left:'-495px',
+				},sp);
+			}
+		});
+	});
+</script>
+</body>
+</html>

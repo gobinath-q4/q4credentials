@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Widget</title>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<style>
+	.widgetWrapper{
+		width:500px;
+		margin:5% auto 0;
+		position:relative;
+	}
+	.widgetCnt{
+		width:96%;
+		overflow:hidden;
+		padding:10px 10px 0 10px;
+		border-radius:5px;
+		border:1px solid #999999;
+		margin-bottom:15px;
+		text-align:center;
+		position:relative;
+	}
+	.widgetleft{
+		position: absolute;
+		left: -22px;
+		top: 50%;
+		font-size: 28px;
+		cursor: pointer;
+		text-decoration:inherit;
+		color:#000;
+	}
+	.widgetright{
+		position: absolute;
+		right: -22px;
+		top: 50%;
+		font-size: 28px;
+		cursor: pointer;
+		text-decoration:inherit;
+		color:#000;
+	}
+	.repeatwidget{
+		width:45%;
+		padding:30px 5px;
+		margin-bottom:10px;
+		border:1px solid #333;
+		display:inline-block;
+		border-radius:5px;
+	}
+	.repeatwidget:nth-of-type(even){
+		margin-left:10px;
+	}
+	.topText{
+		display:inline-block;
+		margin-bottom:10px;
+		width:97%;
+		padding:0 10px;
+	}
+	.topText span:nth-of-type(1){
+		text-align:left;
+		float:left;
+	}
+	.topText span:nth-of-type(2){
+		text-align:right;
+		float:right;
+	}
+	.pn{display:none;}
+	.widgetlist{
+		overflow-x: auto;	
+		position:relative;
+	}
+</style>
+<section>
+	<div class="container">
+		<div class="innerpages">
+			<div class="widgetWrapper">
+				<span data-total="" class="pn"></span>
+				<a href="javascript:void(0)" class="widgetleft leftright"><</a>
+				<div class="widgetCnt">
+					<div class="topText">
+						<span>My Marquee</span>
+						<span>Add</span>
+					</div>
+					<div class="widgetlist"></div>
+					<!--<div class="repeatwidget">widget 1</div>-->
+				</div>
+				<a href="javascript:void(0)" class="widgetright leftright">></a>
+			</div>
+		</div>
+	</div>
+</section>
+<script>
+	$(function(){
+		var wid={'data':[{'Title':'Widget 1','Desc':'Lorem Ipsum'},
+				 {'Title':'Widget 2','Desc':'Lorem Ipsum'},
+				 {'Title':'Widget 3','Desc':'Lorem Ipsum'},
+				 {'Title':'Widget 4','Desc':'Lorem Ipsum'},
+				 {'Title':'Widget 5','Desc':'Lorem Ipsum'},
+				 {'Title':'Widget 6','Desc':'Lorem Ipsum'}
+				]};
+		var l=1;r=2,j=1,q=4,k=0;		
+		var widtot = $(wid['data']).length;
+		var total_page = (widtot/4).toString();
+		var sp = (total_page.split('.')[0]==undefined)?total_page : total_page.split('.')[0];
+		$('.pn').attr({'data-total':widtot,'data-page':sp});		
+		$('.widgetleft').attr('data-left',l);
+		$('.widgetright').attr('data-right',r);		
+		$(wid['data']).each(function(i,n){
+			$('.widgetlist').append('<div class="repeatwidget">'+n['Title']+'</div>');								
+			$('.repeatwidget:gt(3)').hide();			
+		});
+		$('.widgetright').hide();
+		var pn = $('.pn').attr('data-total');
+		var pg = $('.pn').attr('data-page');
+		//$('.widgetlist').css('width',$('.repeatwidget').width()*widtot+'px');
+		$('.leftright').click(function(){
+			var ar=$('.leftright').index(this);	
+			if(ar==0){//left								
+					
+					$('.repeatwidget').hide();	
+					$('.widgetright').show();
+					for(var i=4;i<7;i++){
+						$('.repeatwidget:eq('+i+')').show()
+					}		
+					$('.widgetleft').hide();
+			}else if(ar==1){//right	
+					$('.repeatwidget').hide();				
+					for(var i=0;i<4;i++){
+						$('.repeatwidget:eq('+i+')').show();
+					}
+					$('.widgetright').hide();
+					$('.widgetleft').show();
+			}
+		});
+	});
+</script>
+</body>
+</html>
